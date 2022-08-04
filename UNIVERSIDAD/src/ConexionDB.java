@@ -10,9 +10,9 @@ public class ConexionDB {
   //CONSTRUCTOR
   public ConexionDB(){
     try {
-      this.conexion = DriverManager.getConnection("jdbc:sqlite:universidad_grupo_33");
+      this.conexion = DriverManager.getConnection("jdbc:sqlite:universidad_grupo_33");      //Si no se logra la conexion. Toma null por defecto
       System.out.println("Conexion exitosa a la base de datos");
-      } catch (Exception e) {
+      } catch (SQLException e) {
         e.printStackTrace();
       }
   }
@@ -27,6 +27,7 @@ public class ConexionDB {
     conexion.close();
   }
 
+  //Creo el metodo insertar(le pasamos el query)
   public void insertar(String query) throws SQLException {
     Statement st = conexion.createStatement();
     st.execute(query);

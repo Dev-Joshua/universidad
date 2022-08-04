@@ -12,7 +12,7 @@ public class Universidad {
   private String email;
   private ArrayList<Facultad> facultades;             //Esta es una relacion con la clase Facultad.(facultades se convierte en un atributo de la clase UNIVERSIDAD)
   private ArrayList<Estudiante> estudiantes;          //Relacion con la clase Estudiante.(estudiantes se convierte atributo de la clase Universidad)
-  private Map<String, ArrayList<String>> matriculas;
+  private Map<String, ArrayList<String>> matriculas;  //Un Map en Java es similar a un diccionario de python. Trabaja con clave/valor
   //CONSTRUCTOR
   public Universidad(String nombre, String nit, String direccion, String email) {
     this.nombre = nombre;                             //Se inicializan las variables.
@@ -44,6 +44,18 @@ public class Universidad {
   public String getEmail() {
     return email;
   }
+  
+  public ArrayList<Facultad> getFacultades() {
+    return facultades;
+  }
+
+  public ArrayList<Estudiante> getEstudiantes() {
+    return estudiantes;
+  }
+
+  public Map<String, ArrayList<String>> getMatriculas() {
+    return matriculas;
+  }
 
   //MODIFICADORES
   public void setNombre(String nombre) {
@@ -61,6 +73,41 @@ public class Universidad {
   public void setEmail(String email) {
     this.email = email;
   }
-
   
+  public void setFacultades(ArrayList<Facultad> facultades) {
+    this.facultades = facultades;
+  }
+
+  public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
+    this.estudiantes = estudiantes;
+  }
+
+
+  //ACCIONES(metodos):
+  
+  //Copiamos los datos que recibe el constructor del Estudiante, y creamos un objeto de tipo Estudiante
+  public void registrarEstudiante(String nombre, String apellido, int edad, String cedula, char sexo, String codigo) {
+    Estudiante estudiante = new Estudiante(nombre, apellido, edad, cedula, sexo, codigo);
+    //Almacenar objeto estudiante en el array
+    this.estudiantes.add(estudiante);
+  }
+
+  public void crearFacultad(String codigo, String nombre) {
+    //Crear objeto de tipo facultad
+    Facultad facultad = new Facultad(codigo, nombre);
+    this.facultades.add(facultad);                                                  //facultades es un Map<ArrayList>    
+  }
+ 
+  public void matricularEstudiante(String cedula, String codigoFacultad) {
+    //Validar si ya existe un estudiante matriculado en esa facultad.(Obtener valores del Map a partir de la key)
+    //Si! ya contiene la key(codigoFacultad) añade un elemento mas a dicha facultad
+    if(matriculas.containsKey(codigoFacultad)){
+      //Obtener arrayList y adicionar nuevo elemento(cedula del estudiante)
+      matriculas.get(codigoFacultad).add(cedula);
+    } else{                                                                        //SI NO existe la facultad, entonces añade una nueva con el estudiante(cedula)
+      ArrayList<String> cedulas = new ArrayList<String>();                         //Creo el objeto que contendra el Map como valor
+      cedulas.add(cedula);                                                         //Adicionar cedula al arrayList(cedulas), put() tambien adiciona a matriculas(arrayList)
+      matriculas.put(codigoFacultad, cedulas);                                     //Relaciono el codigoFacultad con la cedula del estudiante 
+    }
+  }
 }
