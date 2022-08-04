@@ -7,7 +7,7 @@ public class Persona {
   private int edad;
   private String cedula; 
   private char sexo; 
-  private ArrayList<String> telefonos;                    //Arreglo de tamaño dinamico(no sabemos cuantos telefonos)
+  private ArrayList<String> telefonos;                    //Arreglo de tamaño dinamico(no sabemos cuantos telefonos tendra)
   
   //Metodo constructor
   public Persona(String nombre, String apellido, int edad, String cedula, char sexo) {
@@ -16,7 +16,7 @@ public class Persona {
     this.edad = edad;
     this.cedula = cedula;
     this.sexo = sexo;
-    this.telefonos = new ArrayList<String>();
+    this.telefonos = new ArrayList<String>();             //Inicializamos la variable
   }
 
   //Consultores
