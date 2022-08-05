@@ -1,3 +1,8 @@
+import java.lang.reflect.Parameter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,7 +17,9 @@ public class Universidad {
   private String email;
   private ArrayList<Facultad> facultades;             //Esta es una relacion con la clase Facultad.(facultades se convierte en un atributo de la clase UNIVERSIDAD)
   private ArrayList<Estudiante> estudiantes;          //Relacion con la clase Estudiante.(estudiantes se convierte atributo de la clase Universidad)
-  private Map<String, ArrayList<String>> matriculas;  //Un Map en Java es similar a un diccionario de python. Trabaja con clave/valor
+  private Map<String, ArrayList<String>> matriculas;  //Un Map hace el trabajo de los ciclos(iterar). Matriculas sera un array con clave/valor
+  
+  
   //CONSTRUCTOR
   public Universidad(String nombre, String nit, String direccion, String email) {
     this.nombre = nombre;                             //Se inicializan las variables.
@@ -83,8 +90,10 @@ public class Universidad {
   }
 
 
-  //ACCIONES(metodos):
-  
+  /*****************************
+   *ACCIONES(metodos):
+  ******************************/
+
   //Copiamos los datos que recibe el constructor del Estudiante, y creamos un objeto de tipo Estudiante
   public void registrarEstudiante(String nombre, String apellido, int edad, String cedula, char sexo, String codigo) {
     Estudiante estudiante = new Estudiante(nombre, apellido, edad, cedula, sexo, codigo);
@@ -107,7 +116,51 @@ public class Universidad {
     } else{                                                                        //SI NO existe la facultad, entonces añade una nueva con el estudiante(cedula)
       ArrayList<String> cedulas = new ArrayList<String>();                         //Creo el objeto que contendra el Map como valor
       cedulas.add(cedula);                                                         //Adicionar cedula al arrayList(cedulas), put() tambien adiciona a matriculas(arrayList)
-      matriculas.put(codigoFacultad, cedulas);                                     //Relaciono el codigoFacultad con la cedula del estudiante 
+      matriculas.put(codigoFacultad, cedulas);                                     //Si aplico un put() el me crea otro elemento con clave/valor(codigoFacultad/cedulas)
     }
   }
+
+
+  /*QUERYS
+   *CONSTRUYO LAS CONSULTAS(querys) SQL DE ESTA CLASE(UNIVERSIDAD) 
+  */
+
+  //1) Registrar esta "" Universidad en mi base de datos 
+  //Recibo el objeto de conexion como parametro.
+  public boolean insert(Connection conn) throws SQLException {
+
+    //Metodo para registrar una Universidad en la BD.
+    boolean insert = false;
+    try {
+      //Preparo consulta SQL.(Hacer la insercion de la nueva universidad a la BD)
+      String query = "INSERT INTO universidades VALUES(?,?,?,?)";                   //Los valores(?) son nit, nombre, direccion, email.
+      PreparedStatement pst = conn.prepareStatement(query);
+      //Setear la consulta SQL
+      pst.setString(1, nit);
+      pst.setString(2, nombre);
+      pst.setString(3, direccion);
+      pst.setString(4, email);
+      //Ejecutar
+      insert = pst.executeUpdate() == 1;
+
+    } catch (SQLDataException e) {
+      e.printStackTrace();                                                          //StackTrace muestra la excepcion(error) en consola.
+      // System.out.println(e.getMessage());
+    }
+    return insert;                                                                  //Retorna un valor boolean.(true si la accion es satisfactoria, false en caso contrario)
+  }
 }
+
+
+
+/*NOTA: Siempre que nos vayamos a comunicar con una BD tendremos un manejador de secciones.
+      (Porque puede quedar mal la estructura SQL, nombrar mal la tabla, generar error, etc...)
+ *NOTA: No concatenar variables directamente con una consultaSQL porque genera problemas(sql Injection)!!
+  
+  -- es un comentario(almohadilla) de SQLite, # es de mySQL
+	String user = "";
+  String password = "\" OR 1=1--";
+
+  SELECT * FROM users WHERE name = user AND pass = password;
+  SELECT * FROM users WHERE name = "anders" AND pass = " " OR 1=1--;
+*/
