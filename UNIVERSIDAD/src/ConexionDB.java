@@ -10,7 +10,7 @@ public class ConexionDB {
   //CONSTRUCTOR
   public ConexionDB(){
     try {
-      this.conexion = DriverManager.getConnection("jdbc:sqlite:universidad_grupo_33");      //Si no se logra la conexion. Toma null por defecto
+      this.conexion = DriverManager.getConnection("jdbc:sqlite:universidad_grupo_33.db");      //Si no se logra la conexion. Toma null por defecto
       System.out.println("Conexion exitosa a la base de datos");
       } catch (SQLException e) {
         e.printStackTrace();
