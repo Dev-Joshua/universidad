@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,7 +34,8 @@ public class ConexionDB {
     Statement st = conexion.createStatement();
     st.execute(query);
   }
-  //El Statement se crea de la conexion. Se debe de importar!!
-  //El objeto Statement va a ejecutar la consulta(query) que recibimos como parametro
-  //El ResulSet captura esa tabla virtual st.excute(query) con la respuesta a esa consulta SQL
 }
+
+//El Statement se crea de la conexion. Se debe de importar!!
+//El objeto Statement va a ejecutar la consulta(query) que recibimos como parametro
+//El ResulSet captura esa tabla virtual st.excute(query) con la respuesta a esa consulta SQL

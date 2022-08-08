@@ -1,3 +1,5 @@
+package model;
+
 public class Facultad {
   //Atributos
   private String codigo;

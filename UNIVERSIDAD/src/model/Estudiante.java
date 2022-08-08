@@ -1,3 +1,5 @@
+package model;
+
 public class Estudiante extends Persona{
   //Atributo
   private String codigo;

@@ -1,0 +1,25 @@
+Creamos este proyecto Universidad por medio de java-project.
+trabajamos con clases de manera independiente dentro del paquete src. 
+Esto se vuelve un poco engorroso por el hecho de que toda la logica de una misma entidad esta en una sola clase.
+
+Para solucionar este tipo de problemas tenemos un patron arquitectural llamado MVC.
+MVC --> Estructura de como va a estar compuesto mi proyecto
+MVC --> Modelo, Vista, Controlador. Cada uno de estos es un paquete(carpeta)
+
+Estos pquetes de MVC me permiten agrupar las clases en funcionalidades en comun para sea mucho mas facil
+poder escalar la solucion al software, añadir nuevas funcionalidades y poder solucionar errores.
+
+-->En el paquete VISTA, vamos a tener todas las clases que hagan parte de la codificacion de la interfaz de usuario.
+   Son todos los elementos con los que va interactuar el usuario(un formulario, una ventana de alerta, la consola, etc..)
+
+-->En el paquete MODELO, tendremos las entidades que hacen parte de la base de datos, las entidades abstractas(Interaccion con la BD)
+   (una clase de tipo persona, universidad, gato, animales). 
+   -->dao: Es una clase que me representa una entidad a nivel SQL, me permite comunicarme con la base de datos para realizar acciones
+           con una entidad en especifco(data access object). 1 dao por cada entidad.
+
+-->En el paquete CONTROLLER, tendremos la logica del software la cual va a interactuar con el MODELO.
+   (interaccion con la base de datos(DB), si se requiere un ArrayList para crear muchas personas o objetos de una clase.)
+   El controlador va estar intansciando la vista y a la vez el modelo.
+
+Si queremos interactuar desde la vista y poder acceder a una clase MODELO, lo hacemos por medio del controlador(CONTROLLER).
+-->La VISTA captura informacion del usuario y la envia al CONTROLLER, quien se encarga de recibir esa informacion e interactuar con el MODELO
