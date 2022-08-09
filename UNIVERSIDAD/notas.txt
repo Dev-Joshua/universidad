@@ -23,3 +23,11 @@ poder escalar la solucion al software, añadir nuevas funcionalidades y poder so
 
 Si queremos interactuar desde la vista y poder acceder a una clase MODELO, lo hacemos por medio del controlador(CONTROLLER).
 -->La VISTA captura informacion del usuario y la envia al CONTROLLER, quien se encarga de recibir esa informacion e interactuar con el MODELO
+
+
+/************************************************************************/
+En el proyecto UNIVERSIDAD:
+
+->Cada entidad va a tener su respectiva clase que va a representar a esa entidad a nivel de consultas SQL.
+  De esta manera le quitamos carga a las entidades que tengamos y las anexamos en otra carpeta(dao)
+  

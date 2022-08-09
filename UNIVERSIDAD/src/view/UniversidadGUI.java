@@ -2,61 +2,42 @@ package view;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import controller.UniversidadController;
 
-//Esta clase vista tendra todo lo que se refiera a la Universidad.(INTERFAZ CONSOLA)
-public class UniversidadVista {
+//Esta clase vista tendra todo lo que se refiera a la Universidad.(INTERFAZ GUI)
+public class UniversidadGUI {
   //Atributos
   //Vista depende de la existencia del controlador.
   private UniversidadController uController;
 
 
-  public UniversidadVista(UniversidadController uController) {
+  public UniversidadGUI(UniversidadController uController) {
     this.uController = uController;
   }
 
 
-  public void crearUniversidad(Scanner sc) throws SQLException  {
-    System.out.println("--------------CREAR UNIVERSIDAD--------------");
-    System.out.println("Por favor ingrese la siguiente informacion");
-    // System.out.println(crearEncabezado("crear universidad"));
-    //Solicito nit
-    System.out.print("Nit: ");
-    String nit = sc.next();
-    sc.nextLine();
-    //nombre
-    System.out.print("Nombre: ");
-    String nombre = sc.next();
-    sc.nextLine();
-    //direccion
-    System.out.print("Direccion: ");
-    String direccion = sc.next();
-    sc.nextLine();
-    //solicito email
-    System.out.print("Email: ");
-    String email = sc.next();
-    sc.nextLine();
+  public void crearUniversidad() throws SQLException  {
+    String encabezado = "--------------CREAR UNIVERSIDAD--------------\n";
+    encabezado += "Por favor ingrese la siguiente informacion\n";
+    //Solicitar datos
+    String nit = JOptionPane.showInputDialog(null, encabezado+"\nNit: ");
+    String nombre = JOptionPane.showInputDialog(null, encabezado+"\nNombre: ");
+    String direccion = JOptionPane.showInputDialog(null, encabezado+"\nDireccion: ");
+    String email = JOptionPane.showInputDialog(null, encabezado+"\nEmail: ");
 
     //Crear universidad
     //Capturo el valor booleano que retorna crearUniversidad()
     boolean insert = uController.crearUniversidad(nit, nombre, direccion, email);
     //Si! se realizo la insercion entonces:
     if(insert) {
-      System.out.println("Universidad creada con exito");
+      JOptionPane.showMessageDialog(null, "\n\nUniversidad creada con exito");  //Hago uso del JOptionPane para mostrar ventanas de dialogo
     } else {
-      System.out.println("Por favor intenta mas tarde");
+      JOptionPane.showMessageDialog(null, "\n\nPor favor intenta mas tarde");
     }
   }
-
-
-  // //Para no duplicar el codigo lo ponemos en otro metodo
-  // public String crearEncabezado(String mensaje) {
-  //   String encabezado = "---------------" + mensaje.toUpperCase() + "---------------\n";
-  //   encabezado += "Por favor ingrese la siguiente informacion: \n";
-  //   return encabezado;
-  // } 
 
   
   //Metodo para obtener y mostrar en consola las universidades que contiene la BD
@@ -72,8 +53,8 @@ public class UniversidadVista {
             info += "\nNombre: " + nombre;
             info += "\n--------------------------\n";                                      //Salto de linea para hacer la division entre cada universidad
         }                                                                                  //Cuando el .next no vea mas registros por iterar en result, el retornara falso y termina el ciclo.
-        //Mostrar universidades                                                                                          
-        System.out.println(info);                                                                   
+        //Mostrar universidades  en GUI                                                                                        
+        JOptionPane.showMessageDialog(null, info);                                                                   
     }catch (Exception e) {
         e.printStackTrace();
     }   
@@ -81,25 +62,24 @@ public class UniversidadVista {
 
 
   //Metodo par aobtener universidad por Nit. Se necesita obtener el objeto de(conexionDB)
-  public void obtenerUniversidadXnit(Scanner sc) {
+  public void obtenerUniversidadXnit() {
       //Encabezado
-      System.out.println("---------------UNIVERSIDAD POR NIT----------------");
-      System.out.print("Nit: ");
-      String nit = sc.next();
-      sc.nextLine();
+      String info = "---------------UNIVERSIDAD POR NIT----------------\n";
+      //Solicito el nit
+      String nit = JOptionPane.showInputDialog(null, info+"\nNit: ");
       //Obtener la universidad
       ResultSet result = uController.consultarUniversidad(nit);
 
-      //Como solo vamos a obtener 1 universidad no es necesasrio un ciclo. Utilizo una conficional
+      //Como solo vamos a obtener 1 universidad no es necesasrio un ciclo. Utilizo una condicional
       try {
           //SI! hay por lo menos un registro(nit) para acceder a esa info, capturamos el nit, nombre, etc...(result.getString("nit"))
           if(result.next()){
-              String info = result.getString("nombre");                                          //Obtener todos los campos
+              info += result.getString("nombre");                                          //Obtener todos los campos
               info += "\n" + result.getString("nit");
               info += "\n" + result.getString("direccion");
               info += "\n" + result.getString("email");
               info += "\n-------------------------------------------------\n";
-              System.out.println(info);                                                                      //Se muestra la informacion
+              JOptionPane.showMessageDialog(null, info);                              //Mostramos por medio de GUI                                                  //Se muestra la informacion
           }
         //Excepcion
       } catch (Exception e) {
@@ -108,44 +88,35 @@ public class UniversidadVista {
   }
 
 
-  //Metodo par actualizar una universidad. Capturamos el objeto(Scanner sc)
-  public void actualizarUniversidad(Scanner sc) {
-    System.out.println("-----------------ACTUALIZAR UNIVERSIDAD-------------------");
+  //Metodo par actualizar una universidad con la interfaz GUI
+  public void actualizarUniversidad() {
+    String info = "-----------------ACTUALIZAR UNIVERSIDAD-------------------\n";
     //Solicitar datos
-    System.out.print("Nit: ");
-    String nit = sc.next();
-    sc.nextLine();
+    String nit = JOptionPane.showInputDialog(null, info+"Nit: ");
     //nombre
-    System.out.print("Nombre: ");
-    String nombre = sc.next();
-    sc.nextLine();
+    String nombre = JOptionPane.showInputDialog(null, info+"Nombre: ");
     //direccion
-    System.out.print("Direccion: ");
-    String direccion = sc.next();
-    sc.nextLine();
+    String direccion = JOptionPane.showInputDialog(null, info+"Direccion: ");
     //solicito email
-    System.out.print("Email: ");
-    String email = sc.next();
-    sc.nextLine();
+    String email = JOptionPane.showInputDialog(null, info+"Email: ");
 
     //Actualizar universidad por medio del controller
     boolean update = uController.actualizarUniversidad(nit, nombre, direccion, email);
     //Si! update es true:
     if(update) {
-      System.out.println("Universidad actualizada con exito");
+      JOptionPane.showMessageDialog(null, "Universidad actualizada con exito");       //Mostrar aviso por GUI
     } else {
-      System.out.println("Por favor intenta mas tarde");
+      JOptionPane.showMessageDialog(null,"Por favor intenta mas tarde");
     }
   }
 
 
 
   //Metodo para eliminar universidad por nit
-  public void eliminarUniversidad(Scanner sc) {
-    System.out.println("--------Eliminar universidad--------");
-    System.out.print("Nit: ");
-    String nit = sc.next();
-    sc.nextLine();
+  public void eliminarUniversidad() {
+    String info = "--------Eliminar universidad--------\n";
+    //Solicitar nit
+    String nit = JOptionPane.showInputDialog(null, info+"Nit: ");
 
     //Eliminar universidad
     //Llamo al controlador para usar el metodo eliminarUniversidad y le envio el nit(parametro)
@@ -153,12 +124,13 @@ public class UniversidadVista {
     boolean delete = uController.eliminarUniversidad(nit);
     //Si! delete es true entonces:
     if(delete) {
-      System.out.println("Universidad eliminada con exito");
+      JOptionPane.showMessageDialog(null, "Universidad eliminada con exito");
     } else {
-      System.out.println("Por favor intenta mas tarde ");
+      JOptionPane.showMessageDialog(null, "Por favor intenta mas tarde ");
     }
   }
 }
 
 /*Esta clase unicamente se encargara de la vista.(lo que se mostrar a a ususario por consola) */
 //El controlador va instanciar la vista, de esta manera puedo cambiar por varias vistas de usuario.
+

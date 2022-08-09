@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 //Map es una interfaz de Java. Se utiliza para almacenar datos en en pares 'clave/valor'
 
+import model.dao.FacultadDao;
+
 public class Universidad {
   //ATRIBUTOS
   private String nombre;
@@ -29,18 +31,18 @@ public class Universidad {
   }
 
 
-  //Para no hacer un getNit,getNombre, un get con cada atributo. Creamos el toString a la entidad Universidad
-  //el toString es un metodo que trae de manera implicita todas las clases para sobreescribirlo.
-  @Override                                                               //funciona para convertir una clase a un string
-  public String toString() {
-    String info = "-------------" + nombre + "------------\n";
-    info += "Nit: " + nit;
-    info += "\nDireccion: " + direccion;
-    info += "\nEmail: " + email;
-    info += "\n-------------------\n";
+  // //Para no hacer un getNit,getNombre, un get con cada atributo. Creamos el toString a la entidad Universidad
+  // //el toString es un metodo que trae de manera implicita todas las clases para sobreescribirlo.
+  // @Override                                                               //funciona para convertir una clase a un string
+  // public String toString() {
+  //   String info = "-------------" + nombre + "------------\n";
+  //   info += "Nit: " + nit;
+  //   info += "\nDireccion: " + direccion;
+  //   info += "\nEmail: " + email;
+  //   info += "\n-------------------\n";
 
-    return info;
-  }
+  //   return info;
+  // }
 
   //CONSULTORES
   public String getNombre() {
@@ -114,10 +116,12 @@ public class Universidad {
     this.estudiantes.add(estudiante);
   }
 
-  public void crearFacultad(String codigo, String nombre) {
+  public void crearFacultad(ConexionDB conexionDB,String codigo, String nombre) {
     //Crear objeto de tipo facultad
-    Facultad facultad = new Facultad(codigo, nombre);
-    this.facultades.add(facultad);                                                  //facultades es un Map<ArrayList>    
+    FacultadDao facultad = new FacultadDao(codigo, nombre);
+    facultad.insert(conexionDB, nit);
+    facultades.add(facultad);
+    //facultades.add(facultad);                                                  //facultades es un Map<ArrayList>    
   }
  
   public void matricularEstudiante(String cedula, String codigoFacultad) {

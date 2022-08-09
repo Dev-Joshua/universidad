@@ -21,12 +21,11 @@ public class UniversidadDao extends Universidad {
     *QUERYS
     *CONSTRUYO LAS CONSULTAS(querys) SQL DE ESTA CLASE(UNIVERSIDAD) 
   ***********************/
-
-  //1) Metodo para registrar esta "" Universidad en mi base de datos 
-  //Recibo el objeto de conexion como parametro.
+  
+  //ACCIONES
+  //1) Metodo para registrar una Universidad en la BD.
+  //Recibo el objeto de conexionDB como parametro.
   public boolean insert(ConexionDB conn) throws SQLException {
-
-    //1) Metodo para registrar una Universidad en la BD.
     boolean insert = false;
     try {
       //Preparo consulta SQL.(Hacer la insercion de la nueva universidad a la BD)
@@ -38,8 +37,7 @@ public class UniversidadDao extends Universidad {
       pst.setString(3, getDireccion());
       pst.setString(4, getEmail());
       //Ejecutar
-      insert = pst.executeUpdate() == 1 ? true : false;
-
+      insert = pst.executeUpdate() == 1 ? true : false;                           //Uso una condicional con operador ternario.
     } catch (SQLDataException e) {
       e.printStackTrace();                                                          //StackTrace muestra la excepcion(error) en consola.
       // System.out.println(e.getMessage());
@@ -115,7 +113,6 @@ public class UniversidadDao extends Universidad {
       pst.setString(1, nit);
       //Ejecutar si el executeUpdate es true, si no se cumple devuelve falso
       delete = pst.executeUpdate() == 1 ? true : false;
-      
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -126,13 +123,12 @@ public class UniversidadDao extends Universidad {
 
 
 
-/*UniversidadDao es la representacion de la entidad Universidad en mi base de datos SQl, esta va a heredar de esa clase
- *Cada que heredamos de una clase tambien debemos poenr su metodo constructor junto con sus parametros.
+/*UniversidadDao(carpeta) es la representacion de las entidadades a nivel de consultsas SQL, esta extiende(hereda) de Universidad.java
  *AQUI EN EL DAO ALMACENO UNICAMENTE MIS CONSULTAS SQL
  */
 
 /*NOTA: Siempre que nos vayamos a comunicar con una BD tendremos un manejador de secciones.
-      (Porque puede quedar mal la estructura SQL, nombrar mal la tabla, generar error, etc...)
+        (Porque puede quedar mal la estructura SQL, nombrar mal la tabla, generar error, etc...)
  *NOTA: No concatenar variables directamente con una consultaSQL porque genera problemas(sql Injection)!!
   
  *NOTA: *Se usa PreparedStatement cuando se van a concatenar variables en una consulta

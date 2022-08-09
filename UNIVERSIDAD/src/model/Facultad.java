@@ -1,5 +1,6 @@
 package model;
 
+
 public class Facultad {
   //Atributos
   private String codigo;
@@ -25,5 +26,6 @@ public class Facultad {
     this.nombre = nombre;
   }
 
+  //ACCIONES
   
 }

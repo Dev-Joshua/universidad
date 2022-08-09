@@ -1,7 +1,8 @@
 package controller;
 
 import model.ConexionDB;
-import view.MenuConsola;
+// import view.MenuConsola;
+import view.MenuGUI;
 
 //Este sera mi controlador principal, va instanciar los demas controladores.
 public class MainController {
@@ -12,8 +13,10 @@ public class MainController {
     //CONSTRUIR CONTROLADORES
     UniversidadController uController = new UniversidadController(conexionDB);
     //CONSTRUIR VISTAS
-    MenuConsola mConsola = new MenuConsola(uController);
-    mConsola.construirMenu();
+    // MenuConsola mConsola = new MenuConsola(uController);
+    // mConsola.construirMenu();
+    MenuGUI menuGui = new MenuGUI(uController);
+    menuGui.crearMenu();
 
     //Cerrar conexion
     try {

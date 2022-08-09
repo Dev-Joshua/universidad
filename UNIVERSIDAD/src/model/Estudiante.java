@@ -10,7 +10,13 @@ public class Estudiante extends Persona{
     this.codigo = codigo;
   }
 
+  //CONSULTOR
   public String getCodigo() {
     return codigo;
+  }
+
+  //MODIFICADOR
+  public void setCodigo(String codigo) {
+    this.codigo = codigo;
   }
 }

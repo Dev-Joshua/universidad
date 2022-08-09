@@ -3,7 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
+// import java.sql.Statement;
 
 public class ConexionDB {
   //ATRIBUTOS
@@ -29,11 +29,11 @@ public class ConexionDB {
     conexion.close();
   }
 
-  //Creo el metodo insertar(le pasamos el query)
-  public void insertar(String query) throws SQLException {
-    Statement st = conexion.createStatement();
-    st.execute(query);
-  }
+  // //Creo el metodo insertar(le pasamos el query)
+  // public void insertar(String query) throws SQLException {
+  //   Statement st = conexion.createStatement();
+  //   st.execute(query);
+  // }
 }
 
 //El Statement se crea de la conexion. Se debe de importar!!
