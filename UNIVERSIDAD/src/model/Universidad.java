@@ -28,6 +28,20 @@ public class Universidad {
     this.matriculas = new  LinkedHashMap<String, ArrayList<String>>();          //Inicializamos el LinkedHashMap
   }
 
+
+  //Para no hacer un getNit,getNombre, un get con cada atributo. Creamos el toString a la entidad Universidad
+  //el toString es un metodo que trae de manera implicita todas las clases para sobreescribirlo.
+  @Override                                                               //funciona para convertir una clase a un string
+  public String toString() {
+    String info = "-------------" + nombre + "------------\n";
+    info += "Nit: " + nit;
+    info += "\nDireccion: " + direccion;
+    info += "\nEmail: " + email;
+    info += "\n-------------------\n";
+
+    return info;
+  }
+
   //CONSULTORES
   public String getNombre() {
     return nombre;
@@ -85,6 +99,8 @@ public class Universidad {
   public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
     this.estudiantes = estudiantes;
   }
+
+
 
 
   /*****************************
