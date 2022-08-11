@@ -90,7 +90,7 @@ public class UniversidadVista {
       //Obtener la universidad
       ResultSet result = uController.consultarUniversidad(nit);
 
-      //Como solo vamos a obtener 1 universidad no es necesasrio un ciclo. Utilizo una conficional
+      //Como solo vamos a obtener 1 universidad no es necesasrio un ciclo. Utilizo una condicional
       try {
           //SI! hay por lo menos un registro(nit) para acceder a esa info, capturamos el nit, nombre, etc...(result.getString("nit"))
           if(result.next()){
@@ -128,7 +128,7 @@ public class UniversidadVista {
     String email = sc.next();
     sc.nextLine();
 
-    //Actualizar universidad por medio del controller
+    //Actualizar universidad por medio del controller(le pasamos los datos por consola) y capturamos el resultado(booleano)
     boolean update = uController.actualizarUniversidad(nit, nombre, direccion, email);
     //Si! update es true:
     if(update) {

@@ -33,14 +33,14 @@ public class UniversidadController {
     return insert;
   }
 
-  //2) Metodo para retornar en un ResultSet los registros en la base de datos (BD).
+  //2) Metodo para retornar(Las universidades) en un ResultSet los registros en la base de datos (BD).
   public ResultSet obtenerUniversidades() {
     ResultSet result = null;
     result = UniversidadDao.getUniversidades(conexionDB);
     return result;
   }
 
-  //3) Metodo para consultar universidad por medio del nit, haciendo la query desde la clase UniversidadDao.
+  //3) Metodo para consultar universidad por medio del nit, haciendo la query desde la clase UniversidadDao(Modelo)
   public ResultSet consultarUniversidad(String nit) {
     return UniversidadDao.selectPorNit(conexionDB, nit);
      

@@ -22,8 +22,8 @@ public class UniversidadGUI {
   public void crearUniversidad() throws SQLException  {
     String encabezado = "--------------CREAR UNIVERSIDAD--------------\n";
     encabezado += "Por favor ingrese la siguiente informacion\n";
-    //Solicitar datos
-    String nit = JOptionPane.showInputDialog(null, encabezado+"\nNit: ");
+    //Solicitar datos al usuario.
+    String nit = JOptionPane.showInputDialog(null, encabezado+"\nNit: ");   //--> Va concatenando el encabezado con cada linea(variable)
     String nombre = JOptionPane.showInputDialog(null, encabezado+"\nNombre: ");
     String direccion = JOptionPane.showInputDialog(null, encabezado+"\nDireccion: ");
     String email = JOptionPane.showInputDialog(null, encabezado+"\nEmail: ");
@@ -33,7 +33,8 @@ public class UniversidadGUI {
     boolean insert = uController.crearUniversidad(nit, nombre, direccion, email);
     //Si! se realizo la insercion entonces:
     if(insert) {
-      JOptionPane.showMessageDialog(null, "\n\nUniversidad creada con exito");  //Hago uso del JOptionPane para mostrar ventanas de dialogo
+      //Hago uso del JOptionPane para mostrar ventanas de dialogo(null, mensaje)
+      JOptionPane.showMessageDialog(null, "\n\nUniversidad creada con exito");  
     } else {
       JOptionPane.showMessageDialog(null, "\n\nPor favor intenta mas tarde");
     }
@@ -115,7 +116,7 @@ public class UniversidadGUI {
   //Metodo para eliminar universidad por nit
   public void eliminarUniversidad() {
     String info = "--------Eliminar universidad--------\n";
-    //Solicitar nit
+    //Solicitar nit y concatenarlo con info
     String nit = JOptionPane.showInputDialog(null, info+"Nit: ");
 
     //Eliminar universidad

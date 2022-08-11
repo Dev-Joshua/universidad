@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import model.ConexionDB;
 import model.Facultad;
 
+
+//este Dao extiende de la clase Facultad
 public class FacultadDao extends Facultad {
   //CONSTRUCTOR
   public FacultadDao(String codigo, String nombre) {
@@ -13,7 +15,8 @@ public class FacultadDao extends Facultad {
   
   //CONSULTAS SQL
   public void insert(ConexionDB conexionDB, String nitUniversidad) {
-    try {
+    try { 
+      //Si la conexion es diferente de null se prepara la consulta
       if(conexionDB.getConexion() != null) {
         String query = "INSERT INTO facultades(codigo, nombre, universidad_nit) VALUES(?,?,?,?)";
         //Preparar consulta

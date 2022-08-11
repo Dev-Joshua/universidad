@@ -6,10 +6,10 @@ import controller.UniversidadController;
 
 //Para que quede mas modular el codigo creo otra vista con el menu del programa
 public class MenuConsola {
-  //Atributo
+  //Atributo - La conexion la construye la clase controller
   private UniversidadController uController;
 
-  //Constructor
+  //Constructor - Le pasamos como parametro el controlador
   public MenuConsola(UniversidadController uController) {
     this.uController = uController;
   }
@@ -19,7 +19,6 @@ public class MenuConsola {
   public void construirMenu() {
     //Crear objeto de tipo UniversidadVista, como parametro se envia el atributo uController.
     UniversidadVista uVista = new UniversidadVista(uController);
-
     //Opciones del menu
     String mensaje = "1) Crear universidad\n";
     mensaje += "2) Mostrar todas las universidades\n";
@@ -32,6 +31,7 @@ public class MenuConsola {
     int opcion = 0;
     Scanner sc = new Scanner(System.in);
     try {
+      //Iteramos opcion mientras sea diferente a -1
       while(opcion != -1) {
         //Solicitar opcion al usuario y capturamos ese valor en la variable opcion.
         System.out.print(mensaje);

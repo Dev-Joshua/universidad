@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import model.ConexionDB;
 import model.Estudiante;
 
+//Este Dao extiende de Estudiante
 public class EstudianteDao extends Estudiante {
   //CONSTRUCTOR
   public EstudianteDao(String nombre, String apellido, int edad, String cedula, char sexo, String codigo) {

@@ -48,7 +48,7 @@ public class UniversidadDao extends Universidad {
 
 
   //2) Metodo para obtener las universidades de mi BD.
-  //Cuando colocamos un metodo como estatico, se puede acceder a el sin crear un objeto de la clase.(simplemente referenciando la)
+  //Cuando colocamos un metodo como estatico, se puede acceder a el sin crear un objeto de la clase.(simplemente referenciando la clase)
   public static ResultSet getUniversidades(ConexionDB conn) {
     ResultSet result = null;
     try {

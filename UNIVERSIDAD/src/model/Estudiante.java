@@ -1,5 +1,6 @@
 package model;
 
+//Esta clase extiende de Persona
 public class Estudiante extends Persona{
   //Atributo
   private String codigo;

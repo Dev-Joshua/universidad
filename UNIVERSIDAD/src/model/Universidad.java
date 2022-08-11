@@ -116,8 +116,9 @@ public class Universidad {
     this.estudiantes.add(estudiante);
   }
 
+  //Recibo la conexionDBcomo pareametro y se lo paso al insert(parametro). F 
   public void crearFacultad(ConexionDB conexionDB,String codigo, String nombre) {
-    //Crear objeto de tipo facultad
+    //Crear objeto de tipo facultad. Este llama al FacultadDao
     FacultadDao facultad = new FacultadDao(codigo, nombre);
     facultad.insert(conexionDB, nit);
     facultades.add(facultad);
